@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -32,38 +33,34 @@ func minimumLoss(price []int64) int64 {
 }
 
 func main() {
-	// reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
+	reader := bufio.NewReaderSize(os.Stdin, 2048*2048)
 
-	// stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	// checkError(err)
+	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
+	checkError(err)
 
-	// defer stdout.Close()
+	defer stdout.Close()
 
-	// writer := bufio.NewWriterSize(stdout, 1024*1024)
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
-	// nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
-	// checkError(err)
-	// n := int32(nTemp)
+	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
+	checkError(err)
+	n := int32(nTemp)
 
-	// priceTemp := strings.Split(readLine(reader), " ")
+	priceTemp := strings.Split(readLine(reader), " ")
 
-	// var price []int64
+	var price []int64
 
-	// for i := 0; i < int(n); i++ {
-	// 	priceItem, err := strconv.ParseInt(priceTemp[i], 10, 64)
-	// 	checkError(err)
-	// 	price = append(price, priceItem)
-	// }
+	for i := 0; i < int(n); i++ {
+		priceItem, err := strconv.ParseInt(priceTemp[i], 10, 64)
+		checkError(err)
+		price = append(price, priceItem)
+	}
 
-	asd := []int64{5, 10, 3}
+	result := minimumLoss(price)
 
-	result := minimumLoss(asd)
+	fmt.Fprintf(writer, "%d\n", result)
 
-	fmt.Print(result)
-
-	// fmt.Fprintf(writer, "%d\n", result)
-
-	// writer.Flush()
+	writer.Flush()
 }
 
 func readLine(reader *bufio.Reader) string {
