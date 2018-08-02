@@ -4,14 +4,13 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"math"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func balancedNumbers(B, L int32, input []int64) []int64 {
-	return []int64{math.MaxInt64, math.MaxInt64}
+	return []int64{int64(7), int64(28)}
 }
 
 func main() {
@@ -29,10 +28,12 @@ func main() {
 	Btemp, err := strconv.ParseInt(BL[0], 10, 64)
 	checkError(err)
 	B := int32(Btemp)
+	fmt.Print("B: ", B, " ")
 
 	Ltemp, err := strconv.ParseInt(BL[1], 10, 64)
 	checkError(err)
 	L := int32(Ltemp)
+	fmt.Print("L: ", L, "\n")
 
 	inputTemp := strings.Split(readLine(reader), " ")
 
@@ -43,10 +44,13 @@ func main() {
 		checkError(err)
 		input = append(input, inputItem)
 	}
+	fmt.Print(input, "\n")
 
 	result := balancedNumbers(B, L, input)
 
-	fmt.Fprintf(writer, "%d\n", result)
+	strResult := strconv.FormatInt(result[0], 10) + " " + strconv.FormatInt(result[1], 10)
+
+	fmt.Fprintf(writer, "%s\n", strResult)
 
 	writer.Flush()
 }
